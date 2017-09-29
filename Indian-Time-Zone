@@ -1,0 +1,85 @@
+package timingzonemeasurement;
+// eastern time convert into Indian standard time .
+
+import java.util.Scanner; //utility sub-package is called.
+class Eastern{
+	protected static int hour;
+    protected static int minute;
+    protected static int second;
+	public static void eastern(int a, int b, int c ){
+    hour   = ((a>0 && a<24 )?a:0);
+    minute = ((b>0 && b<60 )?b:0);
+    second = ((c>0 && c<60 )?c:0);
+		int type=hour;
+		if (hour==0)
+		{
+			hour=0;
+		}
+		else if(hour==12)
+		{
+		hour=12;
+		}
+		else
+		{	
+		hour=hour%12;
+		}
+		System.out.printf("Eastern time :- %d:%d:%d %s",hour,minute,second,(type<12?"am":"pm"));
+		}
+}
+class Indian extends Eastern{
+    public static void indian(){
+	    
+		int h=hour+9;
+		int m=minute+30;
+		int s=second;
+		int m1,h1;
+        if (m<60){
+        	m1=m;
+            h1=h;
+        }
+        else{
+        	m1=m-60;
+            h1=h+1;
+        }
+	int hour1   = ((h1>0 && h1<24 )?h1:0);
+    int minute1 = ((m1>0 && m1<60 )?m1:0);
+    int second1 = ((s>0 && s<60 )?s:0);
+		int type= hour+9;
+		if (hour1==0)
+		{
+			hour1=0;
+		}
+		else if(hour1==12)
+		{
+		hour1=12;
+		}
+		else
+		{	
+		hour1=hour1%12;
+		}
+		System.out.printf("\nindian  time :- %d:%d:%d %s",hour1,minute1,second1,(type<12?"am":"pm"));
+		}
+}	
+public class Indiantimezone {
+      public static void main(String args[]){
+         	Scanner input= new Scanner(System.in);
+          	System.out.println("Enter Eastern time in "+"(hour/minute/second)");
+          	System.out.print("Enter hour :-");
+          	int a = input.nextInt();
+          	System.out.print("Enter minutes :-");
+          	int b = input.nextInt();
+          	System.out.print("Enter seconds :-");
+          	int c = input.nextInt();
+          	if ( a>24 || a<0 || b>60 || b<0 || c>60 || c<0){
+          		System.out.println("you enter wrong time");
+          		System.out.println("hour is always in between 0 and 24"+"\nminute and second is always in between 0 and 60  ");
+          		
+          	}
+          	else{
+            Eastern object1=new Eastern();
+          	object1.eastern(a,b,c); 
+          	Indian object2 =new Indian();
+          	object2.indian();
+          	}
+}
+}
